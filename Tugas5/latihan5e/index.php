@@ -27,7 +27,9 @@ $tabel_product = query("SELECT * FROM tabel_product")
         <?php endforeach; ?>
     </class=>
 </div>
+<button class="tombol-admin"><a href="php/admin.php">Halaman Admin</a></button>
     
 </body>
 </html>
+
 
