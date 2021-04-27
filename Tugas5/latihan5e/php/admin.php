@@ -33,8 +33,6 @@ if (isset($_GET['cari'])) {
                 <input type="text" name="keyword" autofocus>
                 <button type="submit" name="cari">Cari!</button>
             </form>
-            <a href="hapus.php?id=<? $tp['id'] ?>" onclick="return confirm('Hapus Data??')">Hapus</a>
-            <a href="ubah.php?id=<?= $tp['id'] ?>"></a>
         </div>
         <table class="table table-bordered">
             <thead>
@@ -58,13 +56,13 @@ if (isset($_GET['cari'])) {
                     </td>
                 </tr>
         <?php else : ?> 
-        <?php $i = 1 ?>
+        <?php $i = 1; ?>
         <?php foreach ($tabel_product as $tp) : ?>
             <tr>
                 <td><?= $i; ?></td>
                 <td>
-                    <div class="delete"><a href="ubah.php?id=<?= $tp['id'] ?>"></a></div>
-                    <div class="update"><a href="hapus.php?id=<? $tp['id'] ?>" onclick="return confirm('Hapus Data??')">Hapus</a></div>
+                    <button><div class="update"><a href="ubah.php?id=<?= $tp['id']; ?>">Ubah</a></div></button>
+                    <button><div class="delete"><a href="hapus.php?id=<? $tp['id']; ?>" onclick="return confirm('Hapus Data??')">Hapus</a></div></button>
                 </td>
                 <td><img src="../assets/img/<?= $tp["img"]; ?>" alt=""></td>
                 <td><?= $tp["nama"] ?></td>

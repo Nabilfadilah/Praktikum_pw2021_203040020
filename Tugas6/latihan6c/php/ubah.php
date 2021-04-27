@@ -1,4 +1,11 @@
 <?php 
+session_start();
+
+if (!isset($_SESSION["username"])) {
+    header("Location: login.php");
+    exit;
+}
+
 require 'functions.php';
 
 $id = $_GET['id'];
@@ -27,9 +34,26 @@ if (isset($_POST['ubah'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sepatu</title>
     <link rel="stylesheet" href="../pw2021_203040008/latihan4b/css/style.css">
+    <style>
+    section {
+        min-height: 420px;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    span {
+        font-family: arial;
+        border: 1px solid black;
+        padding: 5px;
+        background-color: blue;
+        font-weight: bold;
+    }
+    </style>
 </head>
 <body>
-    <h1>Form Ubah Data Produk</h1>
+    <title>Form Ubah Data Produk</title>
     <form action="" method="post">
         <ul>
             <input type="hidden" name="id" id="id" value="<?= $tp['id']; ?>">

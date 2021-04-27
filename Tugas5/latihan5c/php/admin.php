@@ -19,7 +19,6 @@ $tabel_product = query("SELECT * FROM tabel_product");
     <div class="container">
         <div class="add">
             <button><a href="tambah.php">Tambah Data</a></button>
-            <a href="hapus.php?id=<? $tp['id'] ?>" onclick="return confirm('Hapus Data??')">Hapus</a>
         </div>
         <table class="table table-bordered">
             <thead>
@@ -41,7 +40,7 @@ $tabel_product = query("SELECT * FROM tabel_product");
                 <td><?= $i; ?></td>
                 <td>
                     <a href=""><button>Ubah</button></a>
-                    <a href=""><button>Hapus</button></a>
+                    <button><a href="hapus.php?id=<? $tp['id']; ?>" onclick="return confirm('Hapus Data??');">Hapus</a></button>
                 </td>
                 <td><img src="../assets/img/<?= $tp["img"]; ?>" alt=""></td>
                 <td><?= $tp["nama"] ?></td>
@@ -52,7 +51,7 @@ $tabel_product = query("SELECT * FROM tabel_product");
                 <td><button><?= $tp["produk"] ?></button></td>
             </tr>
         <?php $i++ ?>
-        <?php endforeach ?> 
+        <?php endforeach; ?> 
     </div>
     
 </body>

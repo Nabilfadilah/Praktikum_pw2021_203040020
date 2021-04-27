@@ -2,8 +2,18 @@
 // menghubungkan dengan file php lainya
 require 'functions.php';
 
-// melakukan query 
-$tabel_product = query("SELECT * FROM tabel_product");
+if (isset($_GET['cari'])) {
+    $keyword = $_GET['keyword'];
+    $tabel_product = query("SELECT * FROM tabel_product WHERE 
+    nama LIKE '%$keyword%' OR 
+    ukuran LIKE '%$keyword%' OR 
+    deskripsi LIKE '%$keyword%' OR 
+    harga LIKE '%$keyword%' OR
+    stok LIKE '%$keyword%' OR
+    produk LIKE '%$keyword%' ");
+} else {
+    $tabel_product = query("SELECT * FROM tabel_product");
+}
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +29,13 @@ $tabel_product = query("SELECT * FROM tabel_product");
     <div class="container">
         <div class="add">
             <button><a href="tambah.php">Tambah Data</a></button>
+            <form action="" method="get">
+                <input type="text" name="keyword" autofocus>
+                <button type="submit" name="cari">Cari!</button>
+            </form>
+        </div>
+        <div class="logout">
+            <a href="logout.php">Logout</a>
         </div>
         <table class="table table-bordered">
             <thead>
@@ -33,14 +50,22 @@ $tabel_product = query("SELECT * FROM tabel_product");
                 <th>Stok</th>
                 <th>Produk</th>
             </tr>
-        </thead>   
-        <?php $i = 1 ?>
+        </thead>  
+
+        <?php if (empty($tabel_product)) : ?>
+                <tr>
+                    <td colspan="7">
+                        <h1>Produk Tidak Ditemukan</h1>
+                    </td>
+                </tr>
+        <?php else : ?> 
+        <?php $i = 1; ?>
         <?php foreach ($tabel_product as $tp) : ?>
             <tr>
                 <td><?= $i; ?></td>
                 <td>
-                    <button><a href="ubah.php?id=<?= $tp['id']; ?>">Ubah</a></button>
-                    <button><a href="hapus.php?id=<? $tp['id']; ?>" onclick="return confirm('Hapus Data??')">Hapus</a></button>
+                    <button><div class="update"><a href="ubah.php?id=<?= $tp['id']; ?>">Ubah</a></div></button>
+                    <button><div class="delete"><a href="hapus.php?id=<? $tp['id']; ?>" onclick="return confirm('Hapus Data??')">Hapus</a></div></button>
                 </td>
                 <td><img src="../assets/img/<?= $tp["img"]; ?>" alt=""></td>
                 <td><?= $tp["nama"] ?></td>
@@ -50,8 +75,9 @@ $tabel_product = query("SELECT * FROM tabel_product");
                 <td><?= $tp["stok"] ?></td>
                 <td><button><?= $tp["produk"] ?></button></td>
             </tr>
-        <?php $i++ ?>
+        <?php $i++; ?>
         <?php endforeach; ?> 
+        <?php endif; ?>
     </div>
     
 </body>
